@@ -18,6 +18,20 @@ mtcars_long %>%
   group_by(key) %>% 
   summarise(mean(value), var(value))
 
+#separate takes a column containing multiple variables on input and returns multiple columns, each with a new variable. For example, a column with year/month/day information can be separated into invidual columns.
+
+
+ys <- 1999:2002
+ms <- c('Jan', 'Feb', 'Mar')
+ds <- 1:10
+
+dates <- tidyr::crossing(ys, ms, ds) %>% unite(date, ys:ds, sep = '-')
+dates
+
+# separate is the inverse of unite
+dates %>% separate(date, into = c('year', 'month', 'day'), sep = '-')
+
+
 #crossing s useful for generating combinations of variables in tibble format. For example, use crossing o generate combinations of experimental varaibles including sample names, gene names, reaction conditions, and replicates.
 
 genotype <- c('wt', 'mut')
